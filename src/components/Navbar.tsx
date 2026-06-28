@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Leaf } from 'lucide-react';
+import logoTree from '../assets/logo-tree-transparent-pillow.png';
 
 interface NavbarProps {
   activeSection: string;
