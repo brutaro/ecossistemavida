@@ -1,0 +1,6 @@
+{
+  "name": "Ecossistema Vida",
+  "description": "Uma landing page elegante e profissional para o Ecossistema Vida - Conectar, Desenvolver, Transformar.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
