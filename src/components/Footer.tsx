@@ -5,6 +5,7 @@
 
 import React from 'react';
 import { Leaf, Instagram, Mail, Phone, ExternalLink } from 'lucide-react';
+import logoTree from '../assets/logo-tree-transparent-pillow.png';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -17,7 +18,7 @@ export default function Footer() {
           {/* Column 1: Slogan & Logo */}
           <div className="md:col-span-5 space-y-6">
             <div className="flex items-center gap-3">
-              <img src="/logo-tree-transparent-pillow.png" alt="Ecossistema Vida Logo" className="w-10 h-10 object-contain" />
+              <img src={logoTree} alt="Ecossistema Vida Logo" className="w-10 h-10 object-contain" />
               <div className="flex flex-col">
                 <span className="font-display text-lg font-bold tracking-tight text-court-white">
                   ECOSSISTEMA VIDA

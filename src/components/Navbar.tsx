@@ -43,7 +43,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
         {/* Brand Logo / Emblem */}
         <a href="#inicio" className="flex items-center gap-3 group focus:outline-none">
-          <img src="/logo-tree-transparent-pillow.png" alt="Ecossistema Vida Logo" className="w-10 h-10 object-contain" />
+          <img src={logoTree} alt="Ecossistema Vida Logo" className="w-10 h-10 object-contain" />
           <div className="flex flex-col">
             <span className="font-display text-lg md:text-xl font-bold text-court-white tracking-tight group-hover:text-champagne-gold transition-colors duration-300">
               ECOSSISTEMA VIDA
