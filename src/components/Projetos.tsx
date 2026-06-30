@@ -9,7 +9,11 @@ import { Trophy, Music, Landmark, Star, ArrowUpRight, CheckCircle } from 'lucide
 import { Project, ProjectCategory } from '../types';
 import { PROJECTS } from '../data';
 
-export default function Projetos() {
+interface ProjetosProps {
+  onNavigate?: (view: string, projectId?: string) => void;
+}
+
+export default function Projetos({ onNavigate }: ProjetosProps) {
   const [activeTab, setActiveTab] = useState<ProjectCategory | 'todos'>('todos');
 
   const categories = [
@@ -94,12 +98,19 @@ export default function Projetos() {
               <motion.div
                 layout
                 key={p.id}
+                onClick={() => {
+                  if ((p.name.toLowerCase().includes('copa') || p.name.toLowerCase().includes('open')) && onNavigate) {
+                    onNavigate('project', p.id);
+                  } else {
+                    window.open(`https://wa.me/5531999999999?text=Olá! Gostaria de conversar sobre o projeto "${p.name}" (${getCategoryLabel(p.category)}).`, '_blank');
+                  }
+                }}
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
                 whileHover={{ y: -4, boxShadow: '0 8px 20px rgba(13, 53, 36, 0.08)' }}
-                className="bg-white p-6 rounded border border-champagne-gold/20 flex flex-col justify-between relative overflow-hidden group"
+                className="bg-white p-6 rounded border border-champagne-gold/20 flex flex-col justify-between relative overflow-hidden group cursor-pointer"
               >
                 {/* Ribbon/Selo for Approvação/Captação */}
                 {p.isSeekingSponsor && (
@@ -141,15 +152,9 @@ export default function Projetos() {
                     {p.isSeekingSponsor ? 'Patrocinar Projeto' : 'Ver Detalhes'}
                   </span>
                   
-                  <a
-                    href={`https://wa.me/5531999999999?text=Olá! Gostaria de conversar sobre o projeto "${p.name}" (${getCategoryLabel(p.category)}).`}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="w-8 h-8 rounded-full border border-champagne-gold/20 flex items-center justify-center text-champagne-gold hover:bg-forest-deep hover:text-white hover:border-forest-deep transition-all duration-300"
-                    aria-label={`Saber mais sobre ${p.name}`}
-                  >
+                  <div className="w-8 h-8 rounded-full border border-champagne-gold/20 flex items-center justify-center text-champagne-gold group-hover:bg-forest-deep group-hover:text-white group-hover:border-forest-deep transition-all duration-300">
                     <ArrowUpRight className="w-4 h-4" />
-                  </a>
+                  </div>
                 </div>
               </motion.div>
             ))}

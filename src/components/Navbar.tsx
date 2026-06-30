@@ -9,9 +9,10 @@ import logoTree from '../assets/logo-tree-transparent-pillow.png';
 
 interface NavbarProps {
   activeSection: string;
+  alwaysSolid?: boolean;
 }
 
-export default function Navbar({ activeSection }: NavbarProps) {
+export default function Navbar({ activeSection, alwaysSolid = false }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -36,7 +37,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
-        isScrolled
+        isScrolled || alwaysSolid
           ? 'py-3 bg-forest-deep/90 backdrop-blur-md border-b border-champagne-gold/15 shadow-lg'
           : 'py-5 bg-transparent'
       }`}
