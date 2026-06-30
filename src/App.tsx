@@ -14,11 +14,37 @@ import Impacto from './components/Impacto';
 import Parceiros from './components/Parceiros';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
+import ProjectPage from './components/ProjectPage';
+
+interface ViewState {
+  view: 'home' | 'project';
+  projectId?: string;
+}
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('inicio');
+  const [viewState, setViewState] = useState<ViewState>({ view: 'home' });
+  const [homeScrollY, setHomeScrollY] = useState(0);
+
+  const navigateToProject = (projectId: string) => {
+    setHomeScrollY(window.scrollY);
+    setViewState({ view: 'project', projectId });
+  };
+
+  const navigateToHome = () => {
+    setViewState({ view: 'home' });
+  };
 
   useEffect(() => {
+    if (viewState.view !== 'home') return;
+    
+    // Restore scroll position when returning home
+    if (homeScrollY > 0) {
+      setTimeout(() => {
+        window.scrollTo({ top: homeScrollY, behavior: 'instant' });
+      }, 0);
+    }
+
     const sections = ['inicio', 'ecossistema', 'apoiar', 'calendario', 'projetos', 'impacto', 'contato'];
     
     const handleScroll = () => {
@@ -43,7 +69,7 @@ export default function App() {
     handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [viewState.view]);
 
   return (
     <div className="bg-court-white text-forest-dark selection:bg-champagne-gold/30 selection:text-forest-deep min-h-screen relative overflow-x-hidden">
@@ -51,31 +77,40 @@ export default function App() {
       <WhatsAppButton />
 
       {/* Navigation */}
-      <Navbar activeSection={activeSection} />
+      <Navbar activeSection={activeSection} alwaysSolid={viewState.view !== 'home'} />
 
-      {/* Landing Page Journey: Emociona → Explica → Convida → Mostra o calendário → Apresenta os projetos → Demonstra impacto → Facilita o contato */}
-      <main>
-        {/* 1. HERO - Emociona */}
-        <Hero />
+      {viewState.view === 'home' ? (
+        <main>
+          {/* 1. HERO - Emociona */}
+          <Hero />
 
-        {/* 2. O ECOSSISTEMA - Explica */}
-        <Ecossistema />
+          {/* 2. O ECOSSISTEMA - Explica */}
+          <Ecossistema />
 
-        {/* 3. COMO APOIAR - Convida */}
-        <ComoApoiar />
+          {/* 3. COMO APOIAR - Convida */}
+          <ComoApoiar />
 
-        {/* 4. CALENDÁRIO 2026 - Mostra o calendário */}
-        <Calendario />
+          {/* 4. CALENDÁRIO 2026 - Mostra o calendário */}
+          <Calendario />
 
-        {/* 5. NOSSOS PROJETOS - Apresenta os projetos */}
-        <Projetos />
+          {/* 5. NOSSOS PROJETOS - Apresenta os projetos */}
+          <Projetos onNavigate={(view, projectId) => {
+            if (view === 'project' && projectId) {
+              navigateToProject(projectId);
+            }
+          }} />
 
-        {/* 6. IMPACTO - Demonstra impacto */}
-        <Impacto />
+          {/* 6. IMPACTO - Demonstra impacto */}
+          <Impacto />
 
-        {/* 7. PARCEIROS */}
-        <Parceiros />
-      </main>
+          {/* 7. PARCEIROS */}
+          <Parceiros />
+        </main>
+      ) : viewState.view === 'project' && viewState.projectId ? (
+        <main>
+          <ProjectPage projectId={viewState.projectId} onBack={navigateToHome} />
+        </main>
+      ) : null}
 
       {/* 8. RODAPÉ - Facilita o contato */}
       <Footer />
