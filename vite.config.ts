@@ -5,7 +5,7 @@ import path from 'path';
 
 export default defineConfig(() => {
   return {
-    base: '/ecossistemavida/',
+    base: '/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
