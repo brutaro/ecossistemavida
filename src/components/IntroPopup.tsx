@@ -53,7 +53,7 @@ export default function IntroPopup() {
                 alt="Ecossistema Vida" 
                 className="w-full h-full object-contain drop-shadow-2xl"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-forest-dark via-transparent to-transparent md:bg-gradient-to-l md:from-forest-dark md:via-transparent md:w-24 md:right-0 md:left-auto" />
+              <div className="hidden md:block absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-forest-dark to-transparent" />
             </div>
             
             {/* Text Area - acts as a detail */}
