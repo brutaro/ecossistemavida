@@ -15,6 +15,9 @@ import Parceiros from './components/Parceiros';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 import ProjectPage from './components/ProjectPage';
+import CookieBanner from './components/CookieBanner';
+import LegalModal from './components/LegalModal';
+import IntroPopup from './components/IntroPopup';
 
 interface ViewState {
   view: 'home' | 'project';
@@ -25,6 +28,7 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('inicio');
   const [viewState, setViewState] = useState<ViewState>({ view: 'home' });
   const [homeScrollY, setHomeScrollY] = useState(0);
+  const [activeLegalDoc, setActiveLegalDoc] = useState<'privacy' | 'terms' | 'cookies' | null>(null);
 
   const navigateToProject = (projectId: string) => {
     setHomeScrollY(window.scrollY);
@@ -73,6 +77,8 @@ export default function App() {
 
   return (
     <div className="bg-court-white text-forest-dark selection:bg-champagne-gold/30 selection:text-forest-deep min-h-screen relative overflow-x-hidden">
+      <IntroPopup />
+      
       {/* Floating Elements */}
       <WhatsAppButton />
 
@@ -113,7 +119,14 @@ export default function App() {
       ) : null}
 
       {/* 8. RODAPÉ - Facilita o contato */}
-      <Footer />
+      <Footer onOpenLegal={setActiveLegalDoc} />
+
+      <CookieBanner onOpenPolicy={setActiveLegalDoc} />
+      <LegalModal 
+        isOpen={activeLegalDoc === 'privacy' || activeLegalDoc === 'terms'} 
+        documentType={activeLegalDoc === 'privacy' || activeLegalDoc === 'terms' ? activeLegalDoc : null} 
+        onClose={() => setActiveLegalDoc(null)} 
+      />
     </div>
   );
 }

@@ -275,14 +275,19 @@ export default function ComoApoiar() {
                     </p>
                   </div>
 
-                  <a
-                    href="https://wa.me/5531999999999?text=Olá! Gostaria de uma apresentação executiva sobre como apoiar o Ecossistema Vida através de incentivos fiscais corporativos."
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-8 w-full py-4 bg-transparent border border-champagne-gold hover:bg-champagne-gold hover:text-forest-deep text-champagne-gold rounded font-bold text-xs uppercase tracking-widest transition-all text-center"
-                  >
-                    Falar com Consultor Fiscal
-                  </a>
+                  <div className="mt-8">
+                    <p className="text-[9px] text-court-white/50 text-center mb-2">
+                      Ao entrar em contato, você concorda com nossa Política de Privacidade.
+                    </p>
+                    <a
+                      href="https://wa.me/5531999999999?text=Olá! Gostaria de uma apresentação executiva sobre como apoiar o Ecossistema Vida através de incentivos fiscais corporativos."
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-full py-4 bg-transparent border border-champagne-gold hover:bg-champagne-gold hover:text-forest-deep text-champagne-gold rounded font-bold text-xs uppercase tracking-widest transition-all text-center block"
+                    >
+                      Falar com Consultor Fiscal
+                    </a>
+                  </div>
                 </div>
               </motion.div>
             )}

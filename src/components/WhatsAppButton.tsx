@@ -102,6 +102,10 @@ export default function WhatsAppButton() {
                     className="w-full p-2 bg-white/5 border border-white/10 rounded text-xs text-court-white focus:outline-none focus:border-champagne-gold/50 placeholder-white/40 resize-none"
                   />
 
+                  <p className="text-[9px] text-court-white/50 leading-tight">
+                    Ao iniciar a conversa, você concorda que possamos utilizar seu número para responder à sua solicitação, conforme nossa Política de Privacidade.
+                  </p>
+
                   <button
                     onClick={() => {
                       const baseText = topics.find(t => t.id === selectedTopic)?.text || '';

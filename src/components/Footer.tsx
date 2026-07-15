@@ -7,7 +7,11 @@ import React from 'react';
 import { Leaf, Instagram, Mail, Phone, ExternalLink } from 'lucide-react';
 import logoTree from '../assets/logo-tree-transparent-pillow.png';
 
-export default function Footer() {
+interface FooterProps {
+  onOpenLegal?: (type: 'privacy' | 'terms' | 'cookies') => void;
+}
+
+export default function Footer({ onOpenLegal }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -64,8 +68,8 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-champagne-gold shrink-0" />
-                <a href="mailto:contato@ecossistemavida.org.br" className="hover:text-champagne-gold transition-colors">
-                  contato@ecossistemavida.org.br
+                <a href="mailto:contato.ecossistemavida@gmail.com" className="hover:text-champagne-gold transition-colors break-all">
+                  contato.ecossistemavida@gmail.com
                 </a>
               </li>
               <li className="flex items-center gap-3">
@@ -93,9 +97,15 @@ export default function Footer() {
         <div className="w-full h-[1px] bg-white/10 mb-8" />
 
         {/* Legal & Attribution Footer */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-court-white/50">
-          <div>
-            <span>© {currentYear} Associação Ecossistema Vida. Todos os direitos reservados.</span>
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-[10px] text-court-white/50">
+          <div className="space-y-2">
+            <span className="block">© {currentYear} Associação Ecossistema Vida. Todos os direitos reservados.</span>
+            {onOpenLegal && (
+              <div className="flex gap-4">
+                <button onClick={() => onOpenLegal('privacy')} className="hover:text-champagne-gold transition-colors underline decoration-white/20">Política de Privacidade</button>
+                <button onClick={() => onOpenLegal('terms')} className="hover:text-champagne-gold transition-colors underline decoration-white/20">Termos de Uso</button>
+              </div>
+            )}
           </div>
           
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
