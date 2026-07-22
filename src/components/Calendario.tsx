@@ -249,7 +249,7 @@ export default function Calendario() {
                         : `O evento tradicional "${active.title}" faz parte do calendário oficial de 2026. Tem como propósito principal integrar atletas, apoiadores e patrocinadores para vivenciar a alta performance e gerar doações ao Ecossistema.`}
                     </p>
 
-                    <div className="pt-4">
+                    <div className="pt-4 space-y-2">
                       <a
                         href={`https://wa.me/5531999999999?text=Olá! Tenho interesse em obter detalhes / fazer inscrição para o evento "${active.title}" (${active.month}).`}
                         target="_blank"
@@ -259,6 +259,9 @@ export default function Calendario() {
                         <span>Quero Participar / Inscrever</span>
                         <ArrowRight className="w-3.5 h-3.5" />
                       </a>
+                      <p className="text-[10px] text-court-white/50 text-center font-sans">
+                        Ao solicitar atendimento via WhatsApp, seus dados serão tratados estritamente para o evento.
+                      </p>
                     </div>
                   </div>
                 );
