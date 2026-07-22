@@ -123,8 +123,8 @@ export default function App() {
 
       <CookieBanner onOpenPolicy={setActiveLegalDoc} />
       <LegalModal 
-        isOpen={activeLegalDoc === 'privacy' || activeLegalDoc === 'terms'} 
-        documentType={activeLegalDoc === 'privacy' || activeLegalDoc === 'terms' ? activeLegalDoc : null} 
+        isOpen={activeLegalDoc !== null} 
+        documentType={activeLegalDoc} 
         onClose={() => setActiveLegalDoc(null)} 
       />
     </div>

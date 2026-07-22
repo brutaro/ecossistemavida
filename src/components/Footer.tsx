@@ -101,9 +101,11 @@ export default function Footer({ onOpenLegal }: FooterProps) {
           <div className="space-y-2">
             <span className="block">© {currentYear} Associação Ecossistema Vida. Todos os direitos reservados.</span>
             {onOpenLegal && (
-              <div className="flex gap-4">
+              <div className="flex flex-wrap gap-4 items-center">
                 <button onClick={() => onOpenLegal('privacy')} className="hover:text-champagne-gold transition-colors underline decoration-white/20">Política de Privacidade</button>
                 <button onClick={() => onOpenLegal('terms')} className="hover:text-champagne-gold transition-colors underline decoration-white/20">Termos de Uso</button>
+                <button onClick={() => onOpenLegal('cookies')} className="hover:text-champagne-gold transition-colors underline decoration-white/20">Política de Cookies</button>
+                <button onClick={() => window.dispatchEvent(new Event('ev_open_cookie_preferences'))} className="hover:text-champagne-gold transition-colors underline decoration-champagne-gold/30 text-champagne-gold font-semibold">Gerenciar Cookies</button>
               </div>
             )}
           </div>

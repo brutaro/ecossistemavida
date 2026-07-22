@@ -5,14 +5,14 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { MessageSquare, X, ArrowUpRight, Send } from 'lucide-react';
+import { MessageSquare, X, ArrowUpRight, Send, Mail } from 'lucide-react';
 
 export default function WhatsAppButton() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
   const [userMessage, setUserMessage] = useState('');
 
-  const phone = '5531999999999'; // Placeholder professional WhatsApp number
+  const emailTarget = 'contato.ecossistemavida@gmail.com';
 
   const topics = [
     { id: 'apoio', label: 'Quero apoiar o ecossistema', text: 'Olá! Tenho interesse em saber como apoiar os projetos permanentes do Ecossistema Vida.' },
@@ -20,9 +20,12 @@ export default function WhatsAppButton() {
     { id: 'geral', label: 'Outras informações', text: 'Olá! Gostaria de conversar com a equipe do Ecossistema Vida.' },
   ];
 
-  const handleSend = (textToSend: string) => {
-    const finalMsg = encodeURIComponent(textToSend + (userMessage ? `\n\nMensagem adicional: ${userMessage}` : ''));
-    window.open(`https://wa.me/${phone}?text=${finalMsg}`, '_blank');
+  const handleSend = (topicLabel: string, baseText: string) => {
+    const subject = `[Contato - Ecossistema Vida] ${topicLabel}`;
+    const bodyContent = `${baseText}${userMessage ? `\n\nMensagem / Observações:\n${userMessage}` : ''}`;
+    
+    const mailtoUrl = `mailto:${emailTarget}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyContent)}`;
+    window.location.href = mailtoUrl;
   };
 
   return (
@@ -40,11 +43,11 @@ export default function WhatsAppButton() {
             <div className="bg-forest-dark p-4 border-b border-champagne-gold/15 flex justify-between items-center">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-champagne-gold flex items-center justify-center text-forest-deep">
-                  <MessageSquare className="w-5 h-5 fill-current" />
+                  <Mail className="w-5 h-5 fill-current" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-sm tracking-wide text-champagne-gold uppercase">Ecossistema Vida</h4>
-                  <p className="text-xs text-court-white/70">Resposta média: imediata</p>
+                  <p className="text-xs text-court-white/70">Atendimento por E-mail</p>
                 </div>
               </div>
               <button
@@ -82,7 +85,7 @@ export default function WhatsAppButton() {
               ) : (
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-[10px] uppercase tracking-wider text-champagne-gold font-semibold">Mensagem selecionada</span>
+                    <span className="text-[10px] uppercase tracking-wider text-champagne-gold font-semibold">Assunto selecionado</span>
                     <button
                       onClick={() => setSelectedTopic(null)}
                       className="text-[10px] underline text-court-white/50 hover:text-court-white"
@@ -98,18 +101,20 @@ export default function WhatsAppButton() {
                     rows={2}
                     value={userMessage}
                     onChange={(e) => setUserMessage(e.target.value)}
-                    placeholder="Adicione observações aqui se desejar..."
+                    placeholder="Escreva sua mensagem aqui..."
                     className="w-full p-2 bg-white/5 border border-white/10 rounded text-xs text-court-white focus:outline-none focus:border-champagne-gold/50 placeholder-white/40 resize-none"
                   />
 
                   <p className="text-[9px] text-court-white/50 leading-tight">
-                    Ao iniciar a conversa, você concorda que possamos utilizar seu número para responder à sua solicitação, conforme nossa Política de Privacidade.
+                    Ao iniciar a conversa, seu aplicativo de e-mail será aberto com o assunto e o texto pré-preenchidos, conforme nossa Política de Privacidade.
                   </p>
 
                   <button
                     onClick={() => {
-                      const baseText = topics.find(t => t.id === selectedTopic)?.text || '';
-                      handleSend(baseText);
+                      const topicObj = topics.find(t => t.id === selectedTopic);
+                      if (topicObj) {
+                        handleSend(topicObj.label, topicObj.text);
+                      }
                     }}
                     className="w-full py-2.5 bg-champagne-gold text-forest-deep rounded font-semibold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-champagne-gold/90 transition-colors"
                   >
@@ -138,7 +143,7 @@ export default function WhatsAppButton() {
         style={{
           boxShadow: '0 8px 30px rgba(16, 185, 129, 0.4)'
         }}
-        aria-label="Atendimento Ecossistema Vida"
+        aria-label="Entre em contato"
       >
         <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-champagne-gold opacity-75"></span>
@@ -148,14 +153,15 @@ export default function WhatsAppButton() {
         {isOpen ? (
           <X className="w-6 h-6 animate-spin-once" />
         ) : (
-          <MessageSquare className="w-6 h-6 fill-current" />
+          <Mail className="w-6 h-6" />
         )}
         
         {/* Hover label */}
         <span className="absolute right-16 bg-forest-dark text-court-white border border-champagne-gold/20 text-xs py-1.5 px-3 rounded shadow-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none tracking-wide font-medium">
-          Fale Conosco no WhatsApp
+          Entre em contato
         </span>
       </motion.button>
     </div>
   );
 }
+
