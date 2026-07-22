@@ -7,12 +7,13 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Calendar, MapPin, Trophy, Music, Plus, Minus, ArrowRight } from 'lucide-react';
 import { CALENDARIO } from '../data';
+import { CalendarioItem } from '../types';
 
 export default function Calendario() {
   const [expanded, setExpanded] = useState(false);
   const [activeEvent, setActiveEvent] = useState<string | null>(CALENDARIO[0].id);
 
-  const extraEvents = [
+  const extraEvents: (CalendarioItem & { details: string })[] = [
     {
       id: 'cal-extra-1',
       month: 'FEVEREIRO 2027',
