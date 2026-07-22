@@ -130,7 +130,7 @@ export const PROJECTS: Project[] = [
     id: 'p-cul-1',
     name: 'Almanidade',
     category: 'culturais',
-    description: 'Encontro cultural unindo debates, literatura, música instrumental e palestras transformadoras.',
+    description: 'Concerto para Poeta e Orquestra com Nil Lus no Palácio das Artes, unindo Octeto de Cordas da Orquestra Opus, convidados e legado educacional (Lei Rouanet).',
   },
   {
     id: 'p-cul-2',
