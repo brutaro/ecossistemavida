@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Trophy, Music, Landmark, Star, ArrowUpRight, CheckCircle } from 'lucide-react';
 import { Project, ProjectCategory } from '../types';
 import { PROJECTS } from '../data';
+import AlmanidadeModal from './AlmanidadeModal';
 
 interface ProjetosProps {
   onNavigate?: (view: string, projectId?: string) => void;
@@ -15,6 +16,7 @@ interface ProjetosProps {
 
 export default function Projetos({ onNavigate }: ProjetosProps) {
   const [activeTab, setActiveTab] = useState<ProjectCategory | 'todos'>('todos');
+  const [isAlmanidadeOpen, setIsAlmanidadeOpen] = useState(false);
 
   const categories = [
     { id: 'todos', label: 'Todos os Projetos', icon: null },
@@ -99,7 +101,9 @@ export default function Projetos({ onNavigate }: ProjetosProps) {
                 layout
                 key={p.id}
                 onClick={() => {
-                  if ((p.name.toLowerCase().includes('copa') || p.name.toLowerCase().includes('open')) && onNavigate) {
+                  if (p.name.toLowerCase().includes('almanidade')) {
+                    setIsAlmanidadeOpen(true);
+                  } else if ((p.name.toLowerCase().includes('copa') || p.name.toLowerCase().includes('open')) && onNavigate) {
                     onNavigate('project', p.id);
                   } else {
                     window.open(`https://wa.me/5531999999999?text=Olá! Gostaria de conversar sobre o projeto "${p.name}" (${getCategoryLabel(p.category)}).`, '_blank');
@@ -161,6 +165,11 @@ export default function Projetos({ onNavigate }: ProjetosProps) {
           </AnimatePresence>
         </motion.div>
       </div>
+
+      <AlmanidadeModal
+        isOpen={isAlmanidadeOpen}
+        onClose={() => setIsAlmanidadeOpen(false)}
+      />
     </section>
   );
 }
