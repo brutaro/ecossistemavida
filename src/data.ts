@@ -74,6 +74,7 @@ export const CALENDARIO: CalendarioItem[] = [
     title: 'Almanidade',
     type: 'culture',
     location: 'Teatro Municipal',
+    externalLink: 'https://bileto.sympla.com.br/event/121526?share_id=1-copiarlink',
   },
   {
     id: 'cal-3',

@@ -251,7 +251,7 @@ export default function Calendario() {
 
                     <div className="pt-4 space-y-2">
                       <a
-                        href={`https://wa.me/5531999999999?text=Olá! Tenho interesse em obter detalhes / fazer inscrição para o evento "${active.title}" (${active.month}).`}
+                        href={active.externalLink || `https://wa.me/5531999999999?text=Olá! Tenho interesse em obter detalhes / fazer inscrição para o evento "${active.title}" (${active.month}).`}
                         target="_blank"
                         rel="noreferrer"
                         className="w-full py-3 bg-champagne-gold hover:bg-champagne-gold/90 text-forest-deep rounded font-sans text-xs uppercase tracking-widest font-bold transition-all text-center flex items-center justify-center gap-2"
@@ -260,7 +260,9 @@ export default function Calendario() {
                         <ArrowRight className="w-3.5 h-3.5" />
                       </a>
                       <p className="text-[10px] text-court-white/50 text-center font-sans">
-                        Ao solicitar atendimento via WhatsApp, seus dados serão tratados estritamente para o evento.
+                        {active.externalLink
+                          ? 'Ao clicar, você será direcionado para a página oficial de ingressos/inscrição.'
+                          : 'Ao solicitar atendimento via WhatsApp, seus dados serão tratados estritamente para o evento.'}
                       </p>
                     </div>
                   </div>

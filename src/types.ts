@@ -16,6 +16,7 @@ export interface CalendarioItem {
   title: string;
   type: 'sports' | 'culture';
   location: string;
+  externalLink?: string;
 }
 
 export type ProjectCategory = 'esportes' | 'culturais' | 'permanentes' | 'aprovacao';
